@@ -1,10 +1,6 @@
 version: 0.2
 
 phases:
-  install: 
-    runtime-versions:
-      php: 8.1
-      
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -15,14 +11,6 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
-      - echo Build started on `date`
-      - echo installing composer..
-      - composer install
-      - echo creating .env file..
-      - cp .env.example .env
-      - echo generating app key
-      - php artisan key:generate
-      - echo Building the Docker image..
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
