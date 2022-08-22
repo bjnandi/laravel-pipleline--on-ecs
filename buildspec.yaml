@@ -6,28 +6,28 @@ phases:
       php: 8.1
   pre_build: # commands to be run before build
     commands:
-    - echo Logging in to Amazon ECR....
-    - aws --version
-    # login to Elastic container registry
-    - echo Logging in to Amazon ECR...
-    - echo $AWS_DEFAULT_REGION
-    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-    - REPOSITORY_URI=888276918709.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/laravel-pipleline-on-ecs
-    - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-    - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - echo Logging in to Amazon ECR....
+      - aws --version
+      # login to Elastic container registry
+      - echo Logging in to Amazon ECR...
+      - echo $AWS_DEFAULT_REGION
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - REPOSITORY_URI=AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
          
  build:
     commands:
-    - echo Build started on `date`
-    - echo installing composer..
-    - composer install
-    - echo creating .env file..
-    - cp .env.example .env
-    - echo generating app key
-    - php artisan key:generate
-    - echo Building the Docker image...
-    - docker build -t $REPOSITORY_URI:latest .
-    - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - echo Build started on `date`
+      - echo installing composer..
+      - composer install
+      - echo creating .env file..
+      - cp .env.example .env
+      - echo generating app key
+      - php artisan key:generate
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
