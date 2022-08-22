@@ -1,6 +1,6 @@
-FROM php:7.3.2-apache-stretch
+FROM php:7.4-apache-stretch
 
-LABEL maintainer="Gbenga Oni B. <onigbenga@yahoo.ca>" \
+LABEL maintainer="Biswajit <nbiswajit94@gmail.com>" \
       version="1.0"
 
 COPY --chown=www-data:www-data . /srv/app
