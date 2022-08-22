@@ -1,0 +1,6 @@
+[
+    {
+        "name": "laravelapp",
+        "imageUri": "888276918709.dkr.ecr.ap-south-1.amazonaws.com/laravel-pipleline-on-ecs:latest"
+    }
+]
