@@ -1,9 +1,9 @@
-FROM php:8.1-apache-stretch
+FROM php:7.3-apache-stretch
 
 LABEL maintainer="Biswajit <nbiswajit94@gmail.com>" \
       version="1.0"
 
-COPY --chown=www-data:www-data . /srv/app
+COPY  . /srv/app
 
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf 
 
