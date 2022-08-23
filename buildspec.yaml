@@ -10,7 +10,6 @@ phases:
       - aws --version
       # login to Elastic container registry, make sure you specify the region
       - eval $(aws ecr get-login --region ap-south-1 --no-include-email | sed 's|https://||')
-      - REPOSITORY_URI=888276918709.dkr.ecr.ap-south-1.amazonaws.com/simple
       #Specify the image tag    
       - IMAGE_TAG=1.0
   build:
