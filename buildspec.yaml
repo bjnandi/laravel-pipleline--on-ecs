@@ -18,8 +18,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker 888276918709.dkr.ecr.ap-south-1.amazonaws.com/simple:latest .
-
+      - docker push 888276918709.dkr.ecr.ap-south-1.amazonaws.com/simple:latest .
       
 artifacts:
     files: imagedefinitions.json
