@@ -8,7 +8,6 @@
 	# Sample index.html for test 
 	COPY . /var/www/html/
 	# COPY . /var/www/html/
-    RUN systemctl status docker
 	 
 	# Port and set entry point for container 
 	EXPOSE 80
