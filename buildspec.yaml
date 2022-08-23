@@ -12,6 +12,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - sudo systemctl start docker
+      - sudo systemctl enable docker
       - docker build -t simple:latest .
       - docker tag 888276918709.dkr.ecr.ap-south-1.amazonaws.com/simple:latest 888276918709.dkr.ecr.ap-south-1.amazonaws.com/simple:$IMAGE_TAG
   post_build:
