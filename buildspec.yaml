@@ -3,17 +3,17 @@ phases:
   install: 
     runtime-versions:
       php: 7.3
-  pre_build: # commands to be run before build
-	    commands:
- 	     - echo Logging in to Amazon ECR....
-	     - aws --version
-	     # login to Elastic container registry, make sure you specify the region
-	     - eval $(aws ecr get-login --region ap-south-1 --no-include-email | sed 's|https://||')
-       - REPOSITORY_URI=888276918709.dkr.ecr.ap-south-1.amazonaws.com/laravel-pipleline-on-ecs
-	     #Specify the image tag    
-       - IMAGE_TAG=1.0
-	build:
-	   commands:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR....
+      - aws --version
+      # login to Elastic container registry, make sure you specify the region
+      - eval $(aws ecr get-login --region ap-south-1 --no-include-email | sed 's|https://||')
+      - REPOSITORY_URI=888276918709.dkr.ecr.ap-south-1.amazonaws.com/laravel-pipleline-on-ecs
+      #Specify the image tag    
+      - IMAGE_TAG=1.0
+  build:
+    commands:
       - echo Build started on `date`
       - echo installing composer..
       - composer install
