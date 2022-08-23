@@ -1,14 +1,14 @@
-	FROM centos:centos7
+FROM php:8.1-apache-stretch
 
-	# Install apache2 with less
-	RUN yum -y update && \
-	yum -y install httpd && \
-	yum clean all
-	 
-	# Sample index.html for test 
-	COPY . /var/www/html/
-	# COPY . /var/www/html/
-	 
-	# Port and set entry point for container 
-	EXPOSE 80
-	ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
+LABEL maintainer="Gbenga Oni B. <onigbenga@yahoo.ca>" \
+      version="1.0"
+
+COPY --chown=www-data:www-data . /srv/app
+
+COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf 
+
+WORKDIR /srv/app
+
+RUN docker-php-ext-install mbstring pdo pdo_mysql \ 
+    && a2enmod rewrite negotiation \
+    && docker-php-ext-install opcache
